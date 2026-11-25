@@ -36,6 +36,12 @@ if (form) {
     note.hidden = true;
   }
 
+  // "Book a free site visit" links arrive with ?visit=yes, so answer that question for them.
+  var visit = document.getElementById("visit");
+  if (visit && /[?&]visit=yes\b/.test(window.location.search)) {
+    visit.value = "Yes please";
+  }
+
   function show(message) {
     sent.hidden = message !== sent;
     failed.hidden = message !== failed;
@@ -76,9 +82,11 @@ if (form) {
       "Organisation: " + value("organisation"),
       "Email: " + value("email"),
       "Phone: " + value("phone"),
+      "What they need: " + value("service"),
       "Type of premises: " + value("premises"),
       "Location: " + value("location"),
       "How often: " + value("frequency"),
+      "Free site visit: " + value("site_visit"),
       "",
       "Message:",
       value("message")
