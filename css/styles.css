@@ -180,6 +180,7 @@ p + p {
 
 .brand {
   display: flex;
+  flex: none;
   align-items: center;
   gap: 14px;
   text-decoration: none;
@@ -228,13 +229,14 @@ p + p {
 .site-nav ul {
   display: flex;
   align-items: center;
-  gap: clamp(20px, 3vw, 40px);
+  gap: clamp(18px, 2vw, 32px);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .site-nav a {
+  white-space: nowrap;
   font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -262,7 +264,28 @@ p + p {
   text-decoration: none;
 }
 
-@media (max-width: 860px) {
+/* Phone number in the header: the full number on wide screens, "Call" on phones. */
+.header-call {
+  margin-left: auto;
+  color: var(--silver);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.header-call:hover {
+  color: var(--white);
+}
+
+.header-call-short {
+  display: none;
+}
+
+/* Six menu items and the phone number need room, so the menu folds away below 1180px. */
+@media (max-width: 1180px) {
   :root {
     --header-height: 72px;
   }
@@ -320,6 +343,42 @@ p + p {
     margin-top: 16px;
     padding: 15px 18px;
     text-align: center;
+  }
+}
+
+@media (min-width: 1181px) {
+  .header-call {
+    order: 2;
+    margin-left: 0;
+  }
+
+  .site-nav {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner {
+    gap: 16px;
+  }
+
+  /* On small phones the company name wraps so the header fits. */
+  .brand {
+    flex: 0 1 auto;
+    min-width: 0;
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 56px;
+  }
+
+  .header-call-long {
+    display: none;
+  }
+
+  .header-call-short {
+    display: inline;
   }
 }
 
@@ -816,8 +875,19 @@ p + p {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 4fr);
+  grid-template-columns: minmax(0, 4fr) repeat(3, minmax(0, 3fr));
   gap: 36px 48px;
+}
+
+.footer-contact {
+  margin-top: 16px;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .footer-title {
@@ -862,6 +932,253 @@ p + p {
   .footer-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* Breadcrumb trail above inner page headings */
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  color: var(--silver);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.breadcrumb li + li::before {
+  content: "/";
+  margin-inline: 10px;
+  color: var(--silver-dark);
+}
+
+.breadcrumb a {
+  text-underline-offset: 4px;
+}
+
+.page-head .hero-actions {
+  margin-top: 32px;
+}
+
+.page-head .lead a {
+  text-underline-offset: 4px;
+}
+
+/* A short, direct answer at the top of a page */
+
+.answer {
+  max-width: 46rem;
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+
+.answer h2 {
+  margin-bottom: 18px;
+}
+
+.answer p {
+  font-size: 1.12rem;
+}
+
+.text-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px clamp(40px, 7vw, 96px);
+  padding-top: clamp(40px, 6vw, 64px);
+  border-top: 1px solid var(--rule);
+}
+
+.text-columns h2,
+.link-columns h2 {
+  margin-bottom: 16px;
+  font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+}
+
+.text-columns p {
+  color: var(--text-muted);
+}
+
+.link-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px clamp(40px, 7vw, 96px);
+}
+
+.link-columns p + p {
+  margin-top: 1em;
+}
+
+.link-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link-list li {
+  padding-block: 9px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.link-list a {
+  text-underline-offset: 4px;
+}
+
+.split-text {
+  align-items: start;
+}
+
+.split-text p {
+  color: var(--text-muted);
+}
+
+.split-text h2 {
+  margin-bottom: 18px;
+}
+
+.h2-follow {
+  margin-top: 48px;
+}
+
+.service-more {
+  margin-top: 20px;
+}
+
+.service h2 a {
+  text-decoration: none;
+}
+
+.service h2 a:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.area-links a {
+  text-decoration: none;
+}
+
+.area-links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+}
+
+@media (max-width: 760px) {
+  .text-columns,
+  .link-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Questions and answers that open and close */
+
+.faq-list {
+  max-width: 52rem;
+  border-top: 1px solid var(--rule);
+}
+
+.faq {
+  border-bottom: 1px solid var(--rule);
+}
+
+.faq summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 22px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "+";
+  flex: none;
+  color: var(--silver-dark);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.faq[open] summary::after {
+  content: "\2212";
+}
+
+.faq summary h3 {
+  font-size: clamp(1.15rem, 2vw, 1.3rem);
+}
+
+.faq-answer {
+  padding-bottom: 24px;
+  color: var(--text-muted);
+}
+
+.faq-answer a {
+  text-underline-offset: 4px;
+}
+
+/* Company details on the About page */
+
+.details {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.details dt,
+.details dd {
+  margin: 0;
+  padding-block: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.details dt {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.details dd {
+  overflow-wrap: anywhere;
+}
+
+/* Long-form text: privacy policy and terms */
+
+.prose {
+  max-width: 46rem;
+}
+
+.prose h2 {
+  margin: 44px 0 14px;
+  font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+}
+
+.prose ul {
+  margin: 1em 0;
+  padding-left: 1.2em;
+}
+
+.prose li + li {
+  margin-top: 0.5em;
+}
+
+.prose ul + p {
+  margin-top: 1em;
+}
+
+.form-privacy {
+  margin-top: 18px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
